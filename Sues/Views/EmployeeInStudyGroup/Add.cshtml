@@ -1,0 +1,32 @@
+﻿@model Sues.Models.EmployeeInStudyGroup.EmployeeInStudyGroupEditModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Scripts/myStyle.css" rel="stylesheet" />
+<h2>Добавить работника в учебную группу</h2>
+
+<div class="row tabbable">
+    <div class="@MyStyles.FormColumn">
+        @using (Html.BeginForm("Add", "EmployeeInStudyGroup", FormMethod.Post, new { @class = "form-horizontal", }))
+    {
+        <input type="hidden" id="ReturnUrl" name="ReturnUrl" value="@Model.ReturnUrl" />
+        <input type="hidden" id="StudyGroupId" name="StudyGroupId" value="@Model.StudyGroupId" />
+
+        <fieldset>
+            <div class="form-group">
+                <label class="@MyStyles.FormLabel">Работник:</label>
+                <div class="@MyStyles.FormControl">@Html.DropDownListFor(x => x.EmployeeId, Model.EmployeeSelectList, new { @class = "form-control" })</div>
+            </div>
+
+            <div class="form-group">
+                <div class="@MyStyles.FormLabel"></div>
+                <div class="@MyStyles.FormControl">
+                    <input type="submit" value="Сохранить" class="btn btn-primary" />
+                    <a href="@Model.ReturnUrl" class="btn btn-default">Отмена</a>
+                </div>
+            </div>
+        </fieldset>
+}
+    </div>
+    </div>

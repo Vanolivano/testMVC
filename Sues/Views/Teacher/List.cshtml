@@ -1,0 +1,38 @@
+﻿@model Sues.Models.Teacher.TeacherListModel
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Scripts/myStyle.css" rel="stylesheet" />
+<h1>Преподаватели</h1>
+@if (Model.Items != null && Model.Items.Count() > 0)
+{
+<table class="table table-striped table-hover table-bordered rt-table">
+    <thead>
+        <tr>
+            <th class="rt-table-col-id">ID</th>
+            <th>ФИО</th>
+            <th>Email</th>
+            <th class="rt-table-col-actions"> </th>
+        </tr>
+    </thead>
+    <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td class="rt-table-col-id">@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Email</td>
+                    <td class="rt-table-col-actions">@Html.ActionLink("Удалить", "Delete", new { id = item.Id}, new {@class= "btn btn-delete", @onclick = "if(!confirm('Вы уверены, что хотите удалить элемент?')) { return false; }" })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>@Html.ActionLink("Добавить", "Create", new {ReturnUrl = Request.RawUrl }, new { @class= "btn btn-primary" })</div>
+    }
+ else
+{
+    <h3>
+        Записей не найдено
+    </h3>
+}
